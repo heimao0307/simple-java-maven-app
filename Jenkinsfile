@@ -55,7 +55,7 @@ pipeline {
     stage('部署到测试环境') {
       steps {
         input(id: 'deploy-to-dev', message: '确定要部署到测试环境吗?')
-        kubernetesDeploy(configs: 'deploy/dev/**', enableConfigSubstitution: true, kubeconfigId: '"$KUBECONFIG_CREDENTIAL_ID"', deleteResource: false)
+        kubernetesDeploy(configs: 'deploy/dev/**', enableConfigSubstitution: true, kubeconfigId: "$KUBECONFIG_CREDENTIAL_ID", deleteResource: false)
       }
     }
   }

@@ -9,9 +9,9 @@ metadata:
 spec:
   ports:
     - name: http
-      port: 8081
+      port: 8080
       protocol: TCP
-      targetPort: 8081
+      targetPort: 8080
       nodePort: 30861
   selector:
     app: kubesphere

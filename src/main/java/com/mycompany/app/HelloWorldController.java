@@ -1,4 +1,4 @@
-package io.kubesphere.devops;
+package com.mycompany.app;
 
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;

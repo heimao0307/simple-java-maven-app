@@ -33,13 +33,13 @@ spec:
       containers: #docker容器的配置
       - name: mavendemo
         image: REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:SNAPSHOT-$BRANCH_NAME-$BUILD_NUMBER # pull镜像的地址 ip:prot/dir/images:tag
-         readinessProbe:
-            httpGet:
-              path: /
-              port: 8080
-            timeoutSeconds: 10
-            failureThreshold: 30
-            periodSeconds: 5
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          timeoutSeconds: 10
+          failureThreshold: 30
+          periodSeconds: 5
         imagePullPolicy: IfNotPresent #pull镜像时机
         ports:
         - containerPort: 8080 #容器对外开放端口

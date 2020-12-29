@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment #对象类型
+metadata:
+  name: mavendemo #名称
+  namespace: kubesphere-sample-dev
+  labels:
+    app: mavendemo #标注 
+spec:
+  replicas: 1 #运行容器的副本数，修改这里可以快速修改分布式节点数量
+  selector:
+    matchLabels:
+      app: mavendemo
+  template:
+    metadata:
+      labels:
+        app: mavendemo
+    spec:
+      containers: #docker容器的配置
+      - name: mavendemo
+        image: REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:SNAPSHOT-$BRANCH_NAME-$BUILD_NUMBER # pull镜像的地址 ip:prot/dir/images:tag
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          timeoutSeconds: 10
+          failureThreshold: 30
+          periodSeconds: 5
+        imagePullPolicy: IfNotPresent #pull镜像时机
+        ports:
+        - containerPort: 8080 #容器对外开放端口
+        resources:
+            limits:
+              cpu: 300m
+              memory: 600Mi
+            requests:
+              cpu: 100m
+              memory: 100Mi
+        restartPolicy: Always

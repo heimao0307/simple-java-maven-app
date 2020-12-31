@@ -16,7 +16,7 @@ pipeline {
   stages {
     stage('拉代码') {
       steps {
-        git(url: 'https://github.com/heimao0307/demo-java.git', credentialsId: 'github-id', branch: 'master', changelog: true, poll: false)
+        git(url: 'https://github.com/heimao0307/simple-java-maven-app.git', credentialsId: 'github-id', branch: 'master', changelog: true, poll: false)
       }
     }
     stage('打包') {
@@ -54,7 +54,7 @@ pipeline {
     }
     stage('部署到测试环境') {
       steps {
-        input(id: 'deploy-to-dev', message: '确定要部署到测试环境吗?')
+        // input(id: 'deploy-to-dev', message: '确定要部署到测试环境吗?')
         kubernetesDeploy(configs: 'deploy/dev/**', enableConfigSubstitution: true, kubeconfigId: "$KUBECONFIG_CREDENTIAL_ID", deleteResource: false)
       }
     }
